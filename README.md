@@ -1,8 +1,18 @@
-# AndroidReverseEngineering-Guide
-A comprehensive and professional guide to Android app reverse engineering. Includes practical examples, step-by-step instructions, advanced techniques, security analysis, common errors, and recommended tools. Perfect for developers, security researchers, and anyone looking to master Android reverse engineering.
 # Comprehensive Guide to Android App Reverse Engineering
 
+A comprehensive and professional guide to Android app reverse engineering. Includes practical examples, step-by-step instructions, advanced techniques, security analysis, common errors, and recommended tools. Perfect for developers, security researchers, and anyone looking to master Android reverse engineering.
+
+## Handbook Starter Kit
+
+This repo also contains a structured starter kit for building a full-length handbook:
+
+- [Android_RE_Handbook_Starter_Kit_v2/Android_RE_Handbook_Starter_Kit/](Android_RE_Handbook_Starter_Kit_v2/Android_RE_Handbook_Starter_Kit/) — start here
+- [Kit README](Android_RE_Handbook_Starter_Kit_v2/Android_RE_Handbook_Starter_Kit/README.md) — scope, ethical guidelines, and how to use the kit
+- [Kit TOC](Android_RE_Handbook_Starter_Kit_v2/Android_RE_Handbook_Starter_Kit/TOC.md) — detailed table of contents for the planned handbook
+- [Kit chapters](Android_RE_Handbook_Starter_Kit_v2/Android_RE_Handbook_Starter_Kit/chapters) — starter chapter files (`01-Introduction.md` through `05-Case-Studies.md`, plus `Appendix-Cheatsheets.md`)
+
 ## Table of Contents
+
 1. Introduction
 2. Types of Analysis
 3. Main Tools
@@ -19,6 +29,7 @@ A comprehensive and professional guide to Android app reverse engineering. Inclu
 ---
 
 ## 1. Introduction
+
 Reverse engineering is the process of analyzing software to understand its internal structure and behavior. It is commonly used for educational purposes, vulnerability discovery, and application improvement.
 
 ---
@@ -26,10 +37,12 @@ Reverse engineering is the process of analyzing software to understand its inter
 ## 2. Types of Analysis
 
 ### Static Analysis
+
 - Analyze files without running the application.
 - Tools: APKTool, Bytecode Viewer, Ghidra.
 
 ### Dynamic Analysis
+
 - Monitor the application during execution.
 - Tools: Frida, Objection, Android Emulator Debugging.
 
@@ -75,85 +88,86 @@ Reverse engineering is the process of analyzing software to understand its inter
    - Python (for Frida / Androguard)
 
 2. **Decompile APK**
-```bash
-apktool d app.apk -o app_folder
-Analyze smali files and resources
 
-Inspect AndroidManifest.xml.
+   ```bash
+   apktool d app.apk -o app_folder
+   ```
 
-Identify Activities, Services, and Broadcast Receivers.
+3. **Analyze smali files and resources**
 
-Merge DEX files (if multiple exist)
+4. **Inspect AndroidManifest.xml**
+   - Identify Activities, Services, and Broadcast Receivers.
 
-Use dex-tools or JADX.
+5. **Merge DEX files (if multiple exist)**
+   - Use dex-tools or JADX.
 
-Code Analysis
+6. **Code Analysis**
+   - Bytecode Viewer or Ghidra.
+   - Search for API keys or embedded credentials.
 
-Bytecode Viewer or Ghidra.
+7. **Code Modification**
+   - Patch smali files.
+   - Modify XML or JSON resources.
 
-Search for API keys or embedded credentials.
+8. **Rebuild and Sign APK**
 
-Code Modification
+   ```bash
+   apktool b app_folder -o app_modified.apk
+   jarsigner -verbose -keystore my-release-key.jks app_modified.apk alias_name
+   ```
 
-Patch smali files.
+9. **Test the Modified Application**
+   - Use Emulator or Device.
+   - Monitor behavior and logs.
 
-Modify XML or JSON resources.
+---
 
-Rebuild and Sign APK
+## 5. Security Analysis and Anti-Tampering
 
-apktool b app_folder -o app_modified.apk
-jarsigner -verbose -keystore my-release-key.jks app_modified.apk alias_name
+- Handle obfuscation (ProGuard, R8).
+- Detect anti-debugging mechanisms.
+- Understand digital signature verification.
+- Bypass SSL Pinning and Root Detection for testing.
 
+---
 
-Test the Modified Application
+## 6. Advanced Techniques
 
-Use Emulator or Device.
+- **Hooking & Instrumentation:** Modify runtime behavior.
+- **Deobfuscation:** Reverse obfuscated code.
+- **Native Libraries Analysis:** Analyze .so binaries.
+- **Patching:** Modify code without affecting app integrity.
 
-Monitor behavior and logs.
+---
 
-5. Security Analysis and Anti-Tampering
+## 7. Common Errors and Solutions
 
-Handle obfuscation (ProGuard, R8).
+- APK rebuild fails → check smali syntax, missing resources.
+- Signature issues → ensure proper keystore and alias used.
+- Multiple DEX files → merge before analysis.
+- Dynamic hooks not working → check Frida version & target app architecture.
 
-Detect anti-debugging mechanisms.
+---
 
-Understand digital signature verification.
+## 8. Real-world Examples
 
-Bypass SSL Pinning and Root Detection for testing.
-
-6. Advanced Techniques
-
-Hooking & Instrumentation: Modify runtime behavior.
-
-Deobfuscation: Reverse obfuscated code.
-
-Native Libraries Analysis: Analyze .so binaries.
-
-Patching: Modify code without affecting app integrity.
-
-7. Common Errors and Solutions
-
-APK rebuild fails → check smali syntax, missing resources.
-
-Signature issues → ensure proper keystore and alias used.
-
-Multiple DEX files → merge before analysis.
-
-Dynamic hooks not working → check Frida version & target app architecture.
-
-8. Real-world Examples
-Smali Patch Example
+### Smali Patch Example
 
 Before:
 
+```smali
 const-string v0, "ORIGINAL_API_KEY"
-
+```
 
 After:
 
+```smali
 const-string v0, "MODIFIED_API_KEY"
+```
 
-Flowchart of Reverse Engineering Process
+### Flowchart of Reverse Engineering Process
+
+```text
 APK File
    │
 Decompile (APKTool)
@@ -165,39 +179,58 @@ Patch / Modify
 Rebuild APK
    │
 Sign & Test
+```
 
-Diagram of File Relationships
+### Diagram of File Relationships
+
+```text
 [APK]
  ├─ AndroidManifest.xml
  ├─ smali/
  ├─ res/
  ├─ lib/
  └─ classes.dex
+```
 
-9. Learning and Advanced Resources
+---
 
-Practice on CTF challenges for Android reverse engineering.
+## 9. Learning and Advanced Resources
 
-Study obfuscation techniques and bypass methods.
+- Practice on CTF challenges for Android reverse engineering.
+- Study obfuscation techniques and bypass methods.
+- Use online courses, tutorials, and reverse engineering labs.
+- Join communities for mentorship and advanced tips.
 
-Use online courses, tutorials, and reverse engineering labs.
+---
 
-Join communities for mentorship and advanced tips.
+## 10. Professional Tips
 
-10. Professional Tips
+- Always work on a copy of the original APK.
+- Avoid reverse engineering illegal apps.
+- Use virtual environments for testing.
+- Document findings to build a professional portfolio.
 
-Always work on a copy of the original APK.
+---
 
-Avoid reverse engineering illegal apps.
+## 11. Resources and Communities
 
-Use virtual environments for testing.
+- [XDA Developers](https://xdaforums.com/)
+- [Reddit r/androiddev](https://www.reddit.com/r/androiddev/)
+- [Stack Overflow — Reverse Engineering](https://stackoverflow.com/questions/tagged/reverse-engineering)
+- [Walhajri.me — Android Reverse Engineering](https://walhajri.me/)
 
-Document findings to build a professional portfolio.
-11. Resources and Communities
-XDA Developers
+---
 
-Reddit r/androiddev
+## 12. Conclusion
 
-Stack Overflow - Reverse Engineering
+This guide covered the core workflow of Android reverse engineering, from static and dynamic analysis to patching, rebuilding, and testing. Continue with the [Handbook Starter Kit](Android_RE_Handbook_Starter_Kit_v2/Android_RE_Handbook_Starter_Kit/) for a deeper, chapter-by-chapter treatment.
 
-Walhajri.me - Android Reverse Engineering
+---
+
+## Contributing
+
+Contributions that improve accuracy, clarity, or coverage are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose guide improvements via pull request.
+
+## License
+
+This project is released into the public domain under the terms in [LICENSE](LICENSE) (The Unlicense).
