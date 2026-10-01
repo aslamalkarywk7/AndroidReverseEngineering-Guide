@@ -1,5 +1,7 @@
 # Comprehensive Guide to Android App Reverse Engineering
 
+[![CI](https://github.com/aslamalkarywk7/AndroidReverseEngineering-Guide/actions/workflows/ci.yml/badge.svg)](https://github.com/aslamalkarywk7/AndroidReverseEngineering-Guide/actions/workflows/ci.yml)
+
 A comprehensive and professional guide to Android app reverse engineering. Includes practical examples, step-by-step instructions, advanced techniques, security analysis, common errors, and recommended tools. Perfect for developers, security researchers, and anyone looking to master Android reverse engineering.
 
 ## Handbook Starter Kit
@@ -50,26 +52,21 @@ Reverse engineering is the process of analyzing software to understand its inter
 
 ## 3. Main Tools
 
-- **APKTool**: Decompile and rebuild APKs, modify smali files and resources.  
-  ![APKTool](https://i.imgur.com/GzLdEzG.png)  
+- **APKTool**: Decompile and rebuild APKs, modify smali files and resources.
   [Official Website](https://ibotpeaches.github.io/Apktool/)
 
-- **Bytecode Viewer**: Analyze bytecode and decompile classes.  
-  ![Bytecode Viewer](https://i.imgur.com/QNn4h7v.png)  
+- **Bytecode Viewer**: Analyze bytecode and decompile classes.
   [Official Website](https://bytecodeviewer.com/)
 
-- **Frida**: Dynamic analysis and runtime function hooking.  
-  ![Frida](https://i.imgur.com/Y6gOiQx.png)  
+- **Frida**: Dynamic analysis and runtime function hooking.
   [Official Website](https://frida.re/)
 
-- **Ghidra**: Binary analysis and native library inspection.  
-  ![Ghidra](https://i.imgur.com/p9h8QqO.png)  
+- **Ghidra**: Binary analysis and native library inspection.
   [Official Website](https://ghidra-sre.org/)
 
 - **JD-GUI / CFR / Fernflower**: Decompile smali/class files to readable Java code.
 
-- **JADX**: Complete APK decompilation to readable code.  
-  ![JADX](https://i.imgur.com/oe7ZyqU.png)  
+- **JADX**: Complete APK decompilation to readable code.
   [GitHub Repository](https://github.com/skylot/jadx)
 
 - **Additional Security Tools**
